@@ -35,7 +35,7 @@ function App() {
   useEffect(() => {
     console.log(username);
 
-    if (username && editorRef.current) {
+    if (username) {
       const provider = new SocketIOProvider(
         "http://localhost:3000",
         "monaco",
@@ -47,10 +47,10 @@ function App() {
 
       provider.awareness.setLocalStateField("user", { username });
 
-      const state = Array.from(provider.awareness.getStates().values());
+      const states = Array.from(provider.awareness.getStates().values());
       setUsers(
         states
-          .filter((state) => state.user &&  state.user.username)
+          .filter((state) => state.user && state.user.username)
           .map((state) => state.user),
       );
 
